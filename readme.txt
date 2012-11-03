@@ -1,28 +1,21 @@
 === About ===
+name: TMS Layers
+website: http://openir.media.mit.edu, http://dukodestudio.com, http://twitter.com/kigen
+description: A simple plugin for Ushahidi platform that allows adding TMS Layers as {Base or Overlay} 
+version: 0.1
+requires: TBD
+tested up to: TBD
+authors: DuKode, OpenIR, and Seth kigen
 
-name: WMS Layers
-
-website: http://twitter.com/kigen
-
-description: A simple plugin for Ushahidi platform that allows adding OGC WMS Layers as {Base or Overlay} 
-
-version: 0.4
-
-requires: 2.5
-
-tested up to: 2.5
-
-author: Seth kigen
-
-author website: http://twitter.com/kigen
 
 == Description ==
 
-A simple plugin for Ushahidi platform that allows adding OGC WMS Layers as {Base or Overlay} 
+A simple plugin for Ushahidi platform that allows adding TMS Layers as {Base or Overlay} 
+Based on Seth Kigen's WMS plugin.
 
 == Installation ==
 
-1. Copy the entire /wms/ directory into your /plugins/ directory.
+1. Copy the entire /Ushahidi-plugin-tms/ directory into your /plugins/ directory.
 2. Activate the plugin.
 3. Click on plugin settings to add layers.
 

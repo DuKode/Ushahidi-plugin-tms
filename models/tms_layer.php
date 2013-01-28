@@ -5,24 +5,24 @@
  * 
  */
 
-class Wms_layer_Model extends ORM {
+class Tms_layer_Model extends ORM {
 
-    protected $table_name = 'wms_layer';
+    protected $table_name = 'tms_layer';
     var $db;
 
     /**
      * Get all active base layers
-     * @return WMS_Layer_Model 
+     * @return tms_Layer_Model 
      */
     public function getBaseLayers() {
-        return ORM::factory('wms_layer')->where(array('isBase' => 1, 'isActive' => 1))->find_all();
+        return ORM::factory('tms_layer')->where(array('isBase' => 1, 'isActive' => 1))->find_all();
     }
     /**
      *Get all active layers
-     * @return WMS_Layer_Model 
+     * @return tms_Layer_Model 
      */
     public function getOverlays() {
-        return ORM::factory('wms_layer')->where(array('isBase' => 0, 'isActive' => 1))->find_all();
+        return ORM::factory('tms_layer')->where(array('isBase' => 0, 'isActive' => 1))->find_all();
     }
     /**
      * Activate overlay layers only
@@ -54,7 +54,7 @@ class Wms_layer_Model extends ORM {
      * Activate All layers
      * @param boolean $on 
      */
-    public function wms($on = false) {
+    public function tms($on = false) {
         if ($on) {
             $this->off();
         }
@@ -81,9 +81,9 @@ class Wms_layer_Model extends ORM {
             $layer_name = "";
             if ($a['isBase']) {
                 if ($base_index == 0) {
-                    $layer_name = "wms_base";
+                    $layer_name = "tms_base";
                 } else {
-                    $layer_name = "wms_base{$base_index}";
+                    $layer_name = "tms_base{$base_index}";
                 }
                 $base_index++;
             } else {

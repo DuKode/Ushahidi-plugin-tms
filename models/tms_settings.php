@@ -5,20 +5,20 @@
  * Settings Model
  * 
  */
-class Wms_settings_Model extends ORM {
+class Tms_settings_Model extends ORM {
 
     /**
      * Table Name
      * @var string 
      */
-    protected $table_name = 'wms_settings';
+    protected $table_name = 'tms_settings';
 
     /**
-     * Is WMS config Active
+     * Is tms config Active
      * @return boolean 
      */
-    public function isWms() {
-        $setting = $this->where(array('key' => 'wms'))->find();
+    public function istms() {
+        $setting = $this->where(array('key' => 'tms'))->find();
 
         if ($setting->value == "TRUE") {
             return true;
@@ -64,20 +64,20 @@ class Wms_settings_Model extends ORM {
         $db = new Database();
 
         $db->query("UPDATE {$this->table_name} SET value ='TRUE' where `key` = 'off'");
-        $db->query("UPDATE {$this->table_name} SET value='FALSE' where `key` = 'wms'");
+        $db->query("UPDATE {$this->table_name} SET value='FALSE' where `key` = 'tms'");
         $db->query("UPDATE {$this->table_name} SET value='FALSE' where `key` = 'overlay'");
     }
 
     /**
-     *Activate WMS full support 
+     *Activate tms full support 
      */
-    public function wms() {
+    public function tms() {
 
 
         $db = new Database();
 
         $db->query("UPDATE {$this->table_name} SET value='FALSE' where `key` = 'off'");
-        $db->query("UPDATE {$this->table_name} SET value='TRUE' where `key` = 'wms'");
+        $db->query("UPDATE {$this->table_name} SET value='TRUE' where `key` = 'tms'");
         $db->query("UPDATE {$this->table_name} SET value='FALSE' where `key` = 'overlay'");
     }
     
@@ -90,7 +90,7 @@ class Wms_settings_Model extends ORM {
         $db = new Database();
 
         $db->query("UPDATE {$this->table_name} SET value='FALSE' where `key`='off'");
-        $db->query("UPDATE {$this->table_name} SET value='FALSE' where `key`='wms'");
+        $db->query("UPDATE {$this->table_name} SET value='FALSE' where `key`='tms'");
         $db->query("UPDATE {$this->table_name} SET value='TRUE' where `key`='overlay'");
     }
 

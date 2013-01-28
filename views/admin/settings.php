@@ -2,7 +2,7 @@
     $(document).ready(function (){
        
     })   
-    function wms(val){
+    function tms(val){
         console.log(val);
     }
     function overlay(val){
@@ -17,15 +17,15 @@
 <div>
 
     <h2>
-        WMS Settings
+        Tms Settings
     </h2>
 
 
     <div class="tabs">
         <ul class="tabset">
             <li> 
-                <a class="active" href="<?php echo url::base(); ?>admin/wms_settings">General</a>
-                <a  href="<?php echo url::base(); ?>admin/wms_settings/layers">Layers</a>
+                <a class="active" href="<?php echo url::base(); ?>admin/tms_settings">General</a>
+                <a  href="<?php echo url::base(); ?>admin/tms_settings/layers">Layers</a>
             </li>
         </ul>
     </div>     
@@ -41,23 +41,23 @@
         
     <p>
       
-        <input id="wmsCheck" <?php echo (ORM::factory('wms_settings')->isWms())?  'checked="checked"' : "" ;?> value="wms" name="mapConfig" onchange="wms(this)" type="radio" />
-         <?php echo form::label('Full WMS'); ?><br/>
+        <input id="tmsCheck" <?php echo (ORM::factory('tms_settings')->istms())?  'checked="checked"' : "" ;?> value="tms" name="mapConfig" onchange="tms(this)" type="radio" />
+         <?php echo form::label('Full tms'); ?><br/>
        <span>
-            WMS Layers will be used both as base Layer and Overlay layers
+            tms Layers will be used both as base Layer and Overlay layers
         </span>
          <br/>
          
-           <input id="overlayCheck" <?php echo (ORM::factory('wms_settings')->isOverlay())?  'checked="checked"' : "" ;?>   value="overlay" name="mapConfig" onchange="overlay(this)" type="radio" />
+           <input id="overlayCheck" <?php echo (ORM::factory('tms_settings')->isOverlay())?  'checked="checked"' : "" ;?>   value="overlay" name="mapConfig" onchange="overlay(this)" type="radio" />
 <?php echo form::label('Overlays Only:') ?><br/>
        
         <span>
-            This allows you to add wms layers as overlays only:
+            This allows you to add tms layers as overlays only:
         </span>
         
 
         <br/>
-        <input id="offCheck"  <?php echo (ORM::factory('wms_settings')->isOff())?  'checked="checked"' : "" ;?>   value="off" name="mapConfig" onchange="off(this)" type="radio" /> <?php echo form::label('OFF'); ?><br/>
+        <input id="offCheck"  <?php echo (ORM::factory('tms_settings')->isOff())?  'checked="checked"' : "" ;?>   value="off" name="mapConfig" onchange="off(this)" type="radio" /> <?php echo form::label('OFF'); ?><br/>
        <span>
             Turns off the Plugin, turns on the default OpenStreet maps
         </span>

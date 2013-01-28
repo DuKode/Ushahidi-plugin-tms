@@ -4,7 +4,7 @@
  * Author: @kigen
  * 
  * It supports the plugin:
- * - generating WMS Layer js code
+ * - generating tms Layer js code
  * - Creating mockup Base Layer Objects
  * 
  */
@@ -22,21 +22,17 @@ class layers {
 
         $isbase = ($layer['isBase']) ? "true" : "false";
         return 'var '.$var_name .
-                 "= new OpenLayers.Layer.WMS(
+                 "= new OpenLayers.Layer.TMS(
                             '" . $layer['title'] . "','{$layer['url']}' ,
-                            {
-                                LAYERS: '{$layer['name']}',
-                                transparent: 'true',
-                                tiled: true,
-                                styles:\"\"
-                            },
-                            {
-                                buffer: 0,
-                                sphericalMercator: true,
-                                singleTile: true,
-                                displayOutsideMaxExtent: true,
-                                isBaseLayer: {$isbase}
-                            } 
+                           { 
+                            getURL: this.getOSMURL , 
+                            serviceVersion: '.', 
+                            layername: '.', 
+                            type: 'png', 
+                            isBaseLayer:false, 
+                            updateWhenIdle:'true', 
+                            unloadInvisibleTiles: 'true'                            
+                            }
                         );
                         \n\n
                         ";
@@ -60,12 +56,12 @@ class layers {
         //FIX: To allow mixing layer types 
         //Trick the overlay layer object to take the type of the base Layer. 
         if ($baseType == null) {
-            $layer->openlayers = "WMS";
+            $layer->openlayers = "TMS";
         } else {
             $layer->openlayers = $baseType;
         }
         $layer->title = $layers['title'];
-        $layer->description = 'WMS Layer';
+        $layer->description = 'TMS Layer';
         $layer->api_url = $layers['url'];
         $layer->data = array(
             'baselayer' => $isbase,
@@ -73,7 +69,7 @@ class layers {
             'url' => $layers['url'],
             'type' => ''
         );
-        $layer->wms_params = array(
+        $layer->tms_params = array(
             'format' => 'image/png',
             'layers' => $layers['name'],
             'tiled' => TRUE

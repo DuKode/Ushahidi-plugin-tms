@@ -5,7 +5,7 @@
  * 
  */
 
-class Wms_Controller extends Controller {
+class tms_Controller extends Controller {
 
     /**
      *  Creates PHP layer Objects for the plugin layers 
@@ -15,10 +15,10 @@ class Wms_Controller extends Controller {
         $layers = Event::$data;
 
         //Get all layers configured for the plugin.
-        $layer_list = ORM::factory('wms_layer')->all();
+        $layer_list = ORM::factory('tms_layer')->all();
 
-        //Check map config, for full wms support
-        if (ORM::factory('wms_settings')->isWms()) {
+        //Check map config, for full tms support
+        if (ORM::factory('tms_settings')->istms()) {
             //reset default layer definition
             $layers = array();
             //biuld dummy layer objects 
@@ -44,13 +44,13 @@ class Wms_Controller extends Controller {
     public function modify_layer_code() {
         $js = Event::$data;
         
-        //Full WMS support
-        if (ORM::factory('wms_settings')->isWms()) {
+        //Full tms support
+        if (ORM::factory('tms_settings')->istms()) {
             $js = "";
         }
 
         //Get All layers from the database
-        $layer_list = ORM::factory('wms_layer')->all();
+        $layer_list = ORM::factory('tms_layer')->all();
 
         //Add layers as per above configuration.
         foreach ($layer_list as $key => $layer) {

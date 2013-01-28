@@ -90,15 +90,15 @@
 <div >
 
     <h2>
-        WMS Settings
+        tms Settings
     </h2>
 
 
     <div class="tabs">
         <ul class="tabset">
             <li>
-                <a href="<?php echo url::base(); ?>/admin/wms_settings">General</a>
-                <a class="active" href="<?php echo url::base(); ?>/admin/wms_settings/layers">Layers</a>
+                <a href="<?php echo url::base(); ?>/admin/tms_settings">General</a>
+                <a class="active" href="<?php echo url::base(); ?>/admin/tms_settings/layers">Layers</a>
             </li>
         </ul>
     </div>
@@ -116,7 +116,7 @@
                     <tr>
                         <th>Layer Name (eg world:map)</th>
                         <th>Layer Title (eg World Map)</th>
-                        <th>Url (eg http://localhost:8080/geoserver/wms)</th>
+                        <th>Url (eg http://localhost:8080/geoserver/tms)</th>
                         <th>
                             <a id="add" onclick="addlayer('base')" href="#add">Add Layer</a>
                         </th>
@@ -124,7 +124,7 @@
                 </thead>
                 <tbody id="baseHolder">
                     <?php
-                    $baselayers = ORM::factory('wms_layer')->getBaseLayers();
+                    $baselayers = ORM::factory('tms_layer')->getBaseLayers();
                     foreach ($baselayers as $baselayer):
                         ?>
                         <tr id="<?php echo $baselayer->id; ?>dbbaselayer">
@@ -153,7 +153,7 @@
                     <tr>
                         <th>Layer Name (eg world:map)</th>
                         <th>Layer Title (eg World Map)</th>
-                        <th>Url (eg http://localhost:8080/geoserver/wms)</th>
+                        <th>Url (eg http://localhost:8080/geoserver/tms)</th>
 
                         <th>
                             <a id="add" onclick="addlayer('overlay')" href="#add">Add Layer</a>
@@ -165,7 +165,7 @@
 
 
                     <?php
-                    $overlayers = ORM::factory('wms_layer')->getOverlays();
+                    $overlayers = ORM::factory('tms_layer')->getOverlays();
 
                     foreach ($overlayers as $overlayer):
                         ?>

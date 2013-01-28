@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Description of Wms_Settings
+ * Description of tms_Settings
  *
  * @author Seth
  */
-class Wms_Settings_Controller extends Admin_Controller {
+class Tms_Settings_Controller extends Admin_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -17,29 +17,29 @@ class Wms_Settings_Controller extends Admin_Controller {
         if ($_POST) {
             $post = Validation::factory($_POST);
 
-            ORM::factory('wms_layer')->off(true);
+            ORM::factory('tms_layer')->off(true);
             switch ($post->mapConfig) {
                 case 'overlay':
                     // Save config
-                    ORM::factory('wms_settings')->overlay();
+                    ORM::factory('tms_settings')->overlay();
 
                     //Turn on only overlay layers
-                    ORM::factory('wms_layer')->overlay(true);
+                    ORM::factory('tms_layer')->overlay(true);
                     $this->base(FALSE);
                     break;
-                case 'wms':
+                case 'tms':
                     //Save config
-                    ORM::factory('wms_settings')->wms();
+                    ORM::factory('tms_settings')->tms();
                     //Turn on all layers (base/overlay)
-                    ORM::factory('wms_layer')->off();
+                    ORM::factory('tms_layer')->off();
                     $this->base(TRUE);
                     break;
                 case 'off':
                     //Save config
-                    ORM::factory('wms_settings')->off();
+                    ORM::factory('tms_settings')->off();
                     $this->base(FALSE);
                     //Turn off all layers
-                    //ORM::factory('wms_layer')->off(true);
+                    //ORM::factory('tms_layer')->off(true);
                     break;
             }
         }
@@ -50,19 +50,19 @@ class Wms_Settings_Controller extends Admin_Controller {
         if ($_POST) {
             $post = Validation::factory($_POST);
             $i = 0;
-            if (isset($this->layerName)) {
+            if (isset($post->layerName)) {
                 foreach ($post->layerName as $l) {
 
                     $Layer;
                     switch ($post->flag[$i]) {
 
                         case 'new':
-                            $Layer = ORM::factory('wms_layer');
+                            $Layer = ORM::factory('tms_layer');
                             $Layer->isBase = $post->isBase[$i];
 
                             break;
                         case 'edit':
-                            $Layer = ORM::factory('wms_layer', $post->id[$i]);
+                            $Layer = ORM::factory('tms_layer', $post->id[$i]);
                             break;
                     }
                     $Layer->name = $post->layerName[$i];
@@ -85,11 +85,11 @@ class Wms_Settings_Controller extends Admin_Controller {
         if ($on) {
             //Register the baselayer name..
             $default_map = ORM::factory('settings')->where('key', 'default_map')->find();
-            $this->db->query("UPDATE wms_settings SET value='{$default_map->value}' where `key`='last_base'");
-            $this->db->query("UPDATE " . Kohana::config('database.default.table_prefix') . 'settings SET value=\'wms_base\' WHERE `key`=\'default_map\'');
+            $this->db->query("UPDATE tms_settings SET value='{$default_map->value}' where `key`='last_base'");
+            $this->db->query("UPDATE " . Kohana::config('database.default.table_prefix') . 'settings SET value=\'tms_base\' WHERE `key`=\'default_map\'');
         } else {
 
-            $layer_id = ORM::factory('wms_settings')->lastBase();
+            $layer_id = ORM::factory('tms_settings')->lastBase();
             $this->db->query("UPDATE " . Kohana::config('database.default.table_prefix') . 'settings SET value=\'' . $layer_id . '\' WHERE `key`=\'default_map\'');
         }
     }
